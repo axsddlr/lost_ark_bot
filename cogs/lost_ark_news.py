@@ -22,15 +22,28 @@ lost_ark_wh = config.get('webhooks', 'LOST_ARK_WEBHOOK')
 
 def getLostArkUpdates():
     url = 'http://lostarkapi.herokuapp.com/news/updates'
-    response = requests.get(url)
-    return response.json()
+    url2 = 'https://lost-ark-api.vercel.app/news/updates'
+    heroku = requests.get(url)
+    vercel = requests.get(url2)
+    if heroku.status_code != 200:
+        return vercel.json()
+    elif vercel.status_code != 200:
+        return heroku.json()
+    elif heroku.status_code and vercel.status_code != 200:
+        return vercel.status_code
 
 
 def getserver(world):
-    URL = f"http://lostarkapi.herokuapp.com/server/{world}"
-    # headers = {"Authorization": 'Bearer %s' % nwws_api_key}
-    response = requests.get(URL, headers=headers)
-    return response.json()
+    url = f"http://lostarkapi.herokuapp.com/server/{world}"
+    url2 = f"https://lost-ark-api.vercel.app/server/{world}"
+    heroku = requests.get(url, headers=headers)
+    vercel = requests.get(url2, headers=headers)
+    if heroku.status_code != 200:
+        return vercel.json()
+    elif vercel.status_code != 200:
+        return heroku.json()
+    elif heroku.status_code and vercel.status_code != 200:
+        return vercel.status_code
 
 
 def updater(d, inval, outval):
