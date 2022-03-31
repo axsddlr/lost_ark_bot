@@ -1,0 +1,8 @@
+python-dotenv==0.19.2
+requests==2.27.1
+APScheduler==3.8.1
+ujson==5.1.0
+dhooks==1.1.4
+git+https://github.com/Pycord-Development/pycord
+psutil==5.9.0
+tzlocal==2.1
